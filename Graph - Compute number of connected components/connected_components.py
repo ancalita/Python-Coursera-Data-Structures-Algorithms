@@ -1,4 +1,5 @@
-def reach(adj, x, y):
+def number_of_components(adj):
+    result = 0
     n=len(adj);
     visited=[False for i in range(n)]
     
@@ -10,18 +11,13 @@ def reach(adj, x, y):
             w=neighbours[j];
             if not visited[w]:
                 explore(w, visited, adj);
-    if not visited[x]:
-        explore(x, visited, adj);
+                
+    for j in range(n):
+        if visited[j]==False:
+            explore(j, visited, adj);
+            result+=1;            
     
-    if visited[y]==True:
-        return 1;
-    else:
-        return 0;
+    return result
 
-#adjacency_l=[[1,3],[0,2],[1,3],[2,0]];
-#u=0
-#v=3
-adjacency_l = [[1],[0,2],[1],[]]
-u = 0
-v= 3
-print(reach(adjacency_l,u,v))
+adjacency_l=[[1],[0,2],[1],[]]
+print(number_of_components(adjacency_l))
